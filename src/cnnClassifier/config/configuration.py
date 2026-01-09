@@ -85,9 +85,10 @@ class ConfigurationManager:
         return training_config
     
 
-
-
     def get_evaluation_config(self) -> EvaluationConfig:
+        os.environ["MLFLOW_TRACKING_USERNAME"] = "Gajju9191"
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = "089e1f4ec33ad67cc8541160fe89a199ce77186d"
+        
         eval_config = EvaluationConfig(
             path_of_model=Path("artifacts/training/model.h5"),
             training_data=Path("artifacts/data_ingestion/Chest-CT-Scan-data"),
@@ -96,5 +97,6 @@ class ConfigurationManager:
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE
         )
-
+        
         return eval_config
+

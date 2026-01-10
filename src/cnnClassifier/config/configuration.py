@@ -92,7 +92,7 @@ class ConfigurationManager:
         eval_config = EvaluationConfig(
             path_of_model=Path("artifacts/training/model.h5"),
             training_data=Path("artifacts/data_ingestion/Chest-CT-Scan-data"),
-            mlflow_uri="https://dagshub.com/Gajju9191/chest-d-ct-image-data.mlflow",
+            mlflow_uri="https://dagshub.com/Gajju9191/chest-ct-mlflow-fixed.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE

@@ -54,21 +54,14 @@ class Evaluation:
 
     
     def log_into_mlflow(self):
-        mlflow.set_registry_uri(self.config.mlflow_uri)
-        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        
-        with mlflow.start_run():
-            mlflow.log_params(self.config.all_params)
-            mlflow.log_metrics(
-                {"loss": self.score[0], "accuracy": self.score[1]}
-            )
-            # Model registry does not work with file store
-            if tracking_url_type_store != "file":
+        with mlflow.start_run(run_name="ChestCT_VGG16_v1") as the_run:
+            mlflow.log_param("architecture", "VGG16")
+            mlflow.log_param("dataset", "chest-ct")
+            mlflow.log_param("accuracy", str(self.score[1]))
+            mlflow.log_metrics({
+                "loss": float(self.score[0]),
+            "accuracy": float(self.score[1])
+            })
+            mlflow.keras.log_model(self.model, "model")
+            print("MLflow logged:", the_run.info.run_uuid)
 
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-                mlflow.keras.log_model(self.model, "model", registered_model_name="VGG16Model")
-            else:
-                mlflow.keras.log_model(self.model, "model")

@@ -12,8 +12,8 @@ with mlflow.start_run():
 
 https://dagshub.com/Gajju9191/chest-d-ct-image-data.mlflow
 
-export MLFLOW_TRACKING_URI=https://dagshub.com/Gajju9191/chest-d-ct-image-data.mlflow
+export MLFLOW_TRACKING_URI="https://dagshub.com/Gajju9191/chest-ct-mlflow-fixed.mlflow"
 
-export MLFLOW_TRACKING_USERNAME=Gajju9191
+export MLFLOW_TRACKING_USERNAME="Gajju9191"
 
-export MLFLOW_TRACKING_PASSWORD=089e1f4ec33ad67cc8541160fe89a199ce77186d
+export MLFLOW_TRACKING_PASSWORD="089e1f4ec33ad67cc8541160fe89a199ce77186d"

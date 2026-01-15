@@ -1,3 +1,11 @@
+import sys
+import io
+
+# ✓ Force UTF-8 encoding on Windows
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys. stdout.buffer, encoding='utf-8')
+    sys.stderr = io. TextIOWrapper(sys.stderr. buffer, encoding='utf-8')
+
 
 from cnnClassifier import logger
 from cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
@@ -44,6 +52,7 @@ try:
 except Exception as e:
         logger.exception(e)
         raise e
+
 
 
 STAGE_NAME = "Evaluation stage"

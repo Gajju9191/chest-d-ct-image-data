@@ -1,6 +1,7 @@
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Dict, Any
 
 
 @dataclass(frozen=True)
@@ -43,5 +44,7 @@ class EvaluationConfig:
     training_data: Path
     all_params: dict
     mlflow_uri: str
+    mlflow_tracking_uri: str
+    mlflow_registry_uri: str
     params_image_size: list
     params_batch_size: int

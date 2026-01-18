@@ -20,8 +20,8 @@ class EvaluationPipeline:
         # Step 2: Save score
         evaluation.save_score()
         
-        # Step 3: Log to MLflow (LOCAL + DAGSHUB) ✓ UNCOMMENTED
-        evaluation.log_into_mlflow()
+        # Step 3: Log to MLflow (LOCAL + DAGSHUB) 
+        # evaluation.log_into_mlflow()
 
 if __name__ == '__main__': 
     try:

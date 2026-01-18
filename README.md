@@ -17,3 +17,13 @@ export MLFLOW_TRACKING_URI="https://dagshub.com/Gajju9191/chest-ct-mlflow-fixed.
 export MLFLOW_TRACKING_USERNAME="Gajju9191"
 
 export MLFLOW_TRACKING_PASSWORD="089e1f4ec33ad67cc8541160fe89a199ce77186d"
+
+
+
+### DVC cmd
+
+dvc init
+
+dvc repro
+
+dvc dag

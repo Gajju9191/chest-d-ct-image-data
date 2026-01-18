@@ -1,11 +1,12 @@
-
+# src/cnnClassifier/components/model_training.py
 import os
 import urllib.request as request
 from zipfile import ZipFile
 import tensorflow as tf
 import time
-from cnnClassifier.entity.config_entity import TrainingConfig
+import shutil
 from pathlib import Path
+from cnnClassifier.entity. config_entity import TrainingConfig
 
 
 class Training:
@@ -34,7 +35,7 @@ class Training:
 
         dataflow_kwargs = dict(
             target_size=self.config.params_image_size[:-1],
-            batch_size=self.config.params_batch_size,
+            batch_size=self.config. params_batch_size,
             interpolation="bilinear"
         )
 
@@ -43,7 +44,7 @@ class Training:
         )
 
         self.valid_generator = valid_datagenerator.flow_from_directory(
-            directory=self.config.training_data,
+            directory=self.config. training_data,
             subset="validation",
             shuffle=False,
             **dataflow_kwargs
@@ -62,7 +63,7 @@ class Training:
         else:
             train_datagenerator = valid_datagenerator
 
-        self.train_generator = train_datagenerator.flow_from_directory(
+        self.train_generator = train_datagenerator. flow_from_directory(
             directory=self.config.training_data,
             subset="training",
             shuffle=True,
@@ -93,3 +94,35 @@ class Training:
             path=self.config.trained_model_path,
             model=self.model
         )
+
+    def copy_model_to_root(self):
+        """
+        Copy trained model from artifacts/training/ to root model/ folder
+        This makes the model easily accessible at project root for deployment
+        
+        Source:      artifacts/training/model. h5
+        Destination: model/model.h5
+        """
+        try:
+            # Define source and destination paths
+            source_path = self.config.trained_model_path  # artifacts/training/model.h5
+            destination_folder = Path("model")            # root/model/
+            
+            # Create model folder if it doesn't exist
+            destination_folder.mkdir(exist_ok=True, parents=True)
+            
+            # Copy the model file
+            destination_path = destination_folder / "model.h5"
+            shutil.copy(source_path, destination_path)
+            
+            # Print success message
+            print(f"\n{'='*80}")
+            print(f"[OK] Model copied successfully!")
+            print(f"{'='*80}")
+            print(f"Source:       {source_path}")
+            print(f"Destination:  {destination_path}")
+            print(f"{'='*80}\n")
+            
+        except Exception as e:
+            print(f"\n[ERROR] Failed to copy model:  {e}\n")
+            raise e

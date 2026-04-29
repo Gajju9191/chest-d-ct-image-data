@@ -16,6 +16,12 @@ newgrp docker
 
 sudo apt install awscli -y
 
+if aws cli has  no installation candidate then run below command
+
+sudo apt install unzip
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install && rm -rf awscliv2.zip aws/ && aws --version
+
 
 
 ## AWS configuration

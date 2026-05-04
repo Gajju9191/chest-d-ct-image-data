@@ -30,6 +30,12 @@ newgrp docker
 
 sudo apt install awscli -y
 
+if aws cli has  no installation candidate then run below command (it gets error because latest ubuntu version doesn't support directly to aws cli)
+
+sudo apt install unzip
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install && rm -rf awscliv2.zip aws/ && aws --version
+
 sudo usermod -a -G docker jenkins
 
 
